@@ -22,7 +22,7 @@ get_book_by_id <- function(book_id = NULL){
 	con <- connect_db()
 	sql <- glue::glue_sql("select * from adem.book_recommendations where book_id = {book_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
-	df <- dbGetQuery(con, sql)
+	df <- DBI::dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)
 	return(df)
 }

@@ -33,7 +33,7 @@ get_vacancies <- function(skill = NULL, company = NULL, canton = NULL, limit = 1
 	con <- connect_db()
 	sql <- glue::glue_sql("select v.vacancy_id, v.company_id, v.canton, v.occupation, v.year, v.month from adem.vacancies as v inner join adem.vacancy_skills using (vacancy_id) inner join adem.skills using (skill_id) where skill_label ilike {skill} and canton ilike {canton} limit {limit};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
-	df <- dbGetQuery(con, sql)
+	df <- DBI::dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)
 	return(df)
 }

@@ -19,7 +19,7 @@ get_skill_by_id <- function(skill_id = NULL){
 	con <- connect_db()
 	sql <- glue::glue_sql("select * from adem.skills where skill_id ilike {skill_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
-	df <- dbGetQuery(con, sql)
+	df <- DBI::dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)
 	return(df)
 }
