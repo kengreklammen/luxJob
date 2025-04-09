@@ -21,7 +21,7 @@ log_search <- function(user_id = NULL, query = NULL){
 	con <- connect_db()
 	sql <- glue::glue_sql("insert into student_arpad.search_logs (user_id, query) values({user_id}, {query});", .con = con)
 	DBI::dbExecute(con, "SET search_path TO student_arpad")
-	df <- DBI::dbGetQuery(con, sql)
+	df <- DBI::dbExecute(con, sql)
 	DBI::dbDisconnect(con)
 	return(df)
 }
