@@ -17,8 +17,8 @@ library(RPostgres)
 get_vacancy_by_id <- function(vacancy_id = NULL){
 	if(is.null(vacancy_id) || !is.numeric(vacancy_id)){stop("Missing vacancy_id value!")}
 	con <- connect_db()
-	sql1 <- glue_sql("select * from adem.vacancies where vacancy_id = {vacancy_id};", .con = con)
-	sql2 <- glue_sql("select * from adem.vacancy_skills left join adem.skills using (skill_id) where vacancy_id = {vacancy_id};", .con = con)
+	sql1 <- glue::glue_sql("select * from adem.vacancies where vacancy_id = {vacancy_id};", .con = con)
+	sql2 <- glue::glue_sql("select * from adem.vacancy_skills left join adem.skills using (skill_id) where vacancy_id = {vacancy_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df1 <- dbGetQuery(con, sql1)
 	df2 <- dbGetQuery(con, sql2)

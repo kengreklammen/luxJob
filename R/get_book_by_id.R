@@ -20,7 +20,7 @@ library(RPostgres)
 get_book_by_id <- function(book_id = NULL){
 	if(is.null(book_id) || !is.numeric(book_id)){stop("Missing book_id, or wrong parameter type!")}
 	con <- connect_db()
-	sql <- glue_sql("select * from adem.book_recommendations where book_id = {book_id};", .con = con)
+	sql <- glue::glue_sql("select * from adem.book_recommendations where book_id = {book_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df <- dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)

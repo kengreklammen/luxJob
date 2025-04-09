@@ -21,8 +21,8 @@ get_company_details <- function(company_id = NULL){
 			if(!is.numeric(company_id)){stop("Missing company_id value, or wrong parameter type!")}
 		 }
 	con <- connect_db()
-	sql1 <- glue_sql("select * from adem.companies where company_id = {company_id};", .con = con)
-	sql2 <- glue_sql("select from adem.vacancies where company_id = {company_id};", .con = con)
+	sql1 <- glue::glue_sql("select * from adem.companies where company_id = {company_id};", .con = con)
+	sql2 <- glue::glue_sql("select from adem.vacancies where company_id = {company_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df1 <- dbGetQuery(con, sql1)
 	df2 <- dbGetQuery(con, sql2)

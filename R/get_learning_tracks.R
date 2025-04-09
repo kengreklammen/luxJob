@@ -19,7 +19,7 @@ get_learning_tracks <- function(skill = NULL){
 	if(is.numeric(skill)){stop("Wrong parameter type!")}
 	if(is.null(skill)){skill <- "%"}
 	con <- connect_db()
-	sql <- glue_sql("select t.track_id, t.title, t.description, t.url from adem.learning_tracks as t inner join adem.track_skills using (track_id) inner join adem.skills using (skill_id) where skill_label ilike {skill};", .con = con)
+	sql <- glue::glue_sql("select t.track_id, t.title, t.description, t.url from adem.learning_tracks as t inner join adem.track_skills using (track_id) inner join adem.skills using (skill_id) where skill_label ilike {skill};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df <- dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)

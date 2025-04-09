@@ -17,7 +17,7 @@ library(RPostgres)
 get_skill_by_id <- function(skill_id = NULL){
 	if(is.null(skill_id)){stop("Missing skill_id value!")}
 	con <- connect_db()
-	sql <- glue_sql("select * from adem.skills where skill_id ilike {skill_id};", .con = con)
+	sql <- glue::glue_sql("select * from adem.skills where skill_id ilike {skill_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df <- dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)

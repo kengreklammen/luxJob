@@ -23,7 +23,7 @@ get_books <- function(skill = NULL){
 		if(is.null(skill)){skill <- "%"}
 		}
 	con <- connect_db()
-	sql <- glue_sql("select ab.book_id, ab.title, ab.author from adem.skills left join adem.book_recommendations as ab using (skill_id) where skill_label ilike {skill};", .con = con)
+	sql <- glue::glue_sql("select ab.book_id, ab.title, ab.author from adem.skills left join adem.book_recommendations as ab using (skill_id) where skill_label ilike {skill};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df <- dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)

@@ -22,8 +22,8 @@ get_learning_track_by_id <- function(track_id = NULL){
 		if(!is.numeric(track_id)){stop("Wrong track_id parameter type!")}
 	}
 	con <- connect_db()
-	sql1 <- glue_sql("select * from adem.learning_tracks where track_id = {track_id};", .con = con)
-	sql2 <- glue_sql("select skill_label from adem.track_skills left join adem.skills using (skill_id) where track_id = {track_id};", .con = con)
+	sql1 <- glue::glue_sql("select * from adem.learning_tracks where track_id = {track_id};", .con = con)
+	sql2 <- glue::glue_sql("select skill_label from adem.track_skills left join adem.skills using (skill_id) where track_id = {track_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df1 <- dbGetQuery(con, sql1)
 	df2 <- dbGetQuery(con, sql2)

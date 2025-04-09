@@ -1,10 +1,10 @@
 Package: luxJob
-Title: Tools for querying the job board of ADEM.
+Title: Tools for querying the job board of ADEM
 Version: 0.0.0.9000
 Authors@R: 
     person("Arpad", "Virag", , "arpad.virag@dlhstudent.com", role = c("aut", "cre"))
 Description: A toolkit to provide API for querying the ADEM's job board.
-License: `use_mit_license()`
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

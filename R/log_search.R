@@ -19,7 +19,7 @@ library(RPostgres)
 log_search <- function(user_id = NULL, query = NULL){
 	if(!is.numeric(user_id) || is.null(user_id) || is.numeric(query) || is.null(query)){stop("Missing parameter, or wrong parameter type!")}
 	con <- connect_db()
-	sql <- glue_sql("insert into student_arpad.search_logs (user_id, query) values({user_id}, {query});", .con = con)
+	sql <- glue::glue_sql("insert into student_arpad.search_logs (user_id, query) values({user_id}, {query});", .con = con)
 	DBI::dbExecute(con, "SET search_path TO student_arpad")
 	df <- dbGetQuery(con, sql)
 	DBI::dbDisconnect(con)
