@@ -12,7 +12,7 @@ log_search(user_id = NULL, query = NULL)
 \item{query}{The search string entered by the user.}
 }
 \value{
-Nothing.
+TRUE if the insert was successful, FALSE if otherwise.
 }
 \description{
 Logging user search queries in the database.
