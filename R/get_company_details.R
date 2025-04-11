@@ -16,15 +16,13 @@ library(RPostgres)
 #' get_company_details(12)
 #' }
 get_company_details <- function(company_id = NULL){
-	if(is.null(company_id)){return(NULL)}
-		 else {
-			if(!is.numeric(company_id)){stop("Missing company_id value, or wrong parameter type!")}
-		 }
+	if(is.null(company_id) || (!is.numeric(company_id))){stop("Missing company_id value, or wrong parameter type!")}
 	con <- connect_db()
 	sql1 <- glue::glue_sql("select * from adem.companies where company_id = {company_id};", .con = con)
 	sql2 <- glue::glue_sql("select from adem.vacancies where company_id = {company_id};", .con = con)
 	DBI::dbExecute(con, "SET search_path TO adem")
 	df1 <- DBI::dbGetQuery(con, sql1)
+	if(nrow(df1) == 0){return(NULL)}
 	df2 <- DBI::dbGetQuery(con, sql2)
 	DBI::dbDisconnect(con)
 	l1 = split(df1, seq(nrow(df1)))
