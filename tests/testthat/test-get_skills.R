@@ -19,5 +19,5 @@ test_that("it returns the correct amount of records when using named 'limit' par
 })
 
 test_that("the results contain all the expected columns", {
-	expect_equal(get_skills()[1:1,], data.frame(skill_id="http://data.europa.eu/esco/skill/00735755-adc6-4ea0-b034-b8caff339c9f", skill_label="install heat pump"))
+	expect_equal(get_skills()[1:1,], data.frame(skill_id="http://data.europa.eu/esco/skill/d8903406-abc4-48be-9b2e-5d8ddf103bd9", skill_label="guide operation of heavy construction equipment"))
 })
